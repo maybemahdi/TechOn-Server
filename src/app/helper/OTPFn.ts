@@ -10,6 +10,8 @@ export const OTPFn = async (email: string) => {
 
     await sendEmailFn(email, otp)
 
+    console.log("OTP Email sent")
+
     const updateOTP = await prisma.otp.upsert({
         where: {
             email: email
