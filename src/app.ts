@@ -13,7 +13,12 @@ export const myCache = new NodeCache({ stdTTL: 300 });
 const app = express();
 
 export const corsOptions = {
-  origin: ["http://localhost:3000","http://localhost:6093","http://206.162.244.146:6093"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:6093",
+    "https://tech-on-client.vercel.app",
+    "http://206.162.244.146:6093",
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
