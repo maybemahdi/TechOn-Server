@@ -4,22 +4,20 @@ export const sendOrderConfirmation = async (
   html: string
 ) => {
 
-  const adminEmail = "mahmudhasan.hb@gmail.com";
-
   const transporter = nodemailer.createTransport({
-    service: "gmail", // Use your email service provider
+    service: "gmail",
     auth: {
-      user: adminEmail, // Your email address
-      pass: process.env.MAIL_PASS, // Your email password
+      user: process.env.ADMIN_EMAIL,
+      pass: process.env.MAIL_PASS,
     },
   });
   // Set up email data
   const mailOptions = {
-    from: `"no-reply"<${adminEmail}>`, // Sender address
-    to: email, // List of receivers
-    subject: "Your ORDER Confirmation", // Subject line
-    // text: `Your OTP code is ${otp}` // Plain text body
-    html, // HTML body
+    from: `"no-reply"<${process.env.ADMIN_EMAIL}>`,
+    to: email,
+    subject: "Your ORDER Confirmation",
+    text: "",
+    html,
   };
 
   // Send mail with defined transport object

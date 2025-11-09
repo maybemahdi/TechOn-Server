@@ -4,8 +4,8 @@ export const createContact = async (
     payload: {name: string, email: string,subject: string,message: string}
 ) => {
 
-  const adminEmail = "mahmudhasan.hb@gmail.com";
-  const companyName = "HenrikButz";
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const companyName = "TechOn";
 
   const transporter = nodemailer.createTransport({
     service: "gmail", // Use your email service provider
@@ -20,7 +20,7 @@ export const createContact = async (
     from: `"no-reply"<${adminEmail}>`, // Sender address
     to: payload.email, // List of receivers
     subject: `${payload.subject}`, // Subject line
-    // text: `Your OTP code is ${otp}` // Plain text body
+    text: "",
     html: `
       <!-- Email Card -->
 <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #eef6ff; text-align: center;">

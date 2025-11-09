@@ -1,16 +1,13 @@
 // utils/sendEmail.ts
-import { Resend } from "resend";
 import { prisma } from "../../utils/prisma";
-
-const resend = new Resend(process.env.RESEND_API_KEY!);
+import nodemailer from "nodemailer";
 
 export const sendEmailFn = async (email: string, otp: number) => {
   const findUser = await prisma.user.findUnique({
     where: { email },
   });
 
-  const adminEmail = process.env.ADMIN_EMAIL;
-  const companyName = "Demo Company";
+  const companyName = "TechOn";
 
   const htmlContent = `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: auto; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); background-color: #ffffff; border: 1px solid #e0e0e0;">
@@ -37,10 +34,21 @@ export const sendEmailFn = async (email: string, otp: number) => {
     </div>
   `;
 
-  await resend.emails.send({
-    from: `"${companyName}" <${adminEmail}>`,
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.ADMIN_EMAIL,
+      pass: process.env.MAIL_PASS,
+    },
+  });
+
+  await transporter.sendMail({
+    from: `"no-reply"<${process.env.ADMIN_EMAIL}>`,
     to: email,
-    subject: "Your OTP Code",
+    subject: "Your One-Time Password (OTP)",
+    text: "",
     html: htmlContent,
   });
 };
+
+
