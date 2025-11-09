@@ -35,9 +35,7 @@ export const sendEmailFn = async (email: string, otp: number) => {
   `;
 
   const transporter = nodemailer.createTransport({
-    host: "smtp.elasticemail.com",
-    port: 587,
-    // service: "gmail",
+    service: "gmail",
     auth: {
       user: process.env.ADMIN_EMAIL,
       pass: process.env.MAIL_PASS,
