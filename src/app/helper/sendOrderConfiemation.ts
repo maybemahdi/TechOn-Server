@@ -1,19 +1,15 @@
 import nodemailer from "nodemailer";
-export const sendOrderConfirmation = async (
-  email: string,
-  html: string
-) => {
-
+export const sendOrderConfirmation = async (email: string, html: string) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: process.env.ADMIN_EMAIL,
-      pass: process.env.MAIL_PASS,
+      pass: process.env.APP_PASS,
     },
   });
   // Set up email data
   const mailOptions = {
-    from: `"no-reply"<${process.env.ADMIN_EMAIL}>`,
+    from: process.env.ADMIN_EMAIL,
     to: email,
     subject: "Your ORDER Confirmation",
     text: "",

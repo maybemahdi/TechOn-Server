@@ -1,9 +1,10 @@
-
 import nodemailer from "nodemailer";
-export const createContact = async (
-    payload: {name: string, email: string,subject: string,message: string}
-) => {
-
+export const createContact = async (payload: {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}) => {
   const adminEmail = process.env.ADMIN_EMAIL;
   const companyName = "TechOn";
 
@@ -11,13 +12,13 @@ export const createContact = async (
     service: "gmail", // Use your email service provider
     auth: {
       user: adminEmail, // Your email address
-      pass: process.env.MAIL_PASS, // Your email password
+      pass: process.env.APP_PASS, // Your email password
     },
   });
 
   // Set up email data
   const mailOptions = {
-    from: `"no-reply"<${adminEmail}>`, // Sender address
+    from: adminEmail, // Sender address
     to: payload.email, // List of receivers
     subject: `${payload.subject}`, // Subject line
     text: "",

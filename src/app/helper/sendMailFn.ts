@@ -38,17 +38,15 @@ export const sendEmailFn = async (email: string, otp: number) => {
     service: "gmail",
     auth: {
       user: process.env.ADMIN_EMAIL,
-      pass: process.env.MAIL_PASS,
+      pass: process.env.APP_PASS,
     },
   });
 
   await transporter.sendMail({
-    from: `"no-reply"<${process.env.ADMIN_EMAIL}>`,
+    from: process.env.ADMIN_EMAIL,
     to: email,
     subject: "Your One-Time Password (OTP)",
     text: "",
     html: htmlContent,
   });
 };
-
-
